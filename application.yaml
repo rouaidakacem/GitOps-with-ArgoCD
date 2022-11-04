@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: joanie-production
+  namespace: argocd
+  annotations: 
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/ergocd-github
+    argocd-image-updater.argoproj.io/image-list: joanie=rouaidaka/joanie:main
+    argocd-image-updater.argoproj.io/joanie.update-strategy: digest
+    argocd-image-updater.argoproj.io/git-branch: main
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/rouaidakacem/GitOps-with-ArgoCD.git
+    targetRevision: main
+    path: joanie
+    helm: 
+      valueFiles:
+        - ../values/production.yaml
+      parameters:
+        - name: image.repository
+          value: rouaidaka/joanie
+        - name: image.tag
+          value: main
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: joanie-production
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
