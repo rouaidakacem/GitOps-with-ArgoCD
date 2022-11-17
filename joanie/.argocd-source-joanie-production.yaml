@@ -1,0 +1,11 @@
+helm:
+  parameters:
+  - name: image.repository
+    value: rouaidaka/joanie
+    forcestring: false
+  - name: image.tag
+    value: main@sha256:3b8261e5bdee2f6953daa48916e48bfeb7c1e1f32d87e2c5e1639b1432c81dfd
+    forcestring: true
+  - name: image.name
+    value: rouaidaka/joanie
+    forcestring: true

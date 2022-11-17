@@ -1,0 +1,33 @@
+{{ if .Values.strategy }}
+apiVersion: argoproj.io/v1alpha1              
+kind: Rollout
+metadata:
+  name: joanie-argocd
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: joanie
+  workloadRef:                      
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "joanie.fullname" . }}
+  revisionHistoryLimit: 5
+  strategy:
+{{ if eq .Values.strategy "blue-green" }}
+    blueGreen:
+      activeService: {{ include "joanie.fullname" . }}
+      autoPromotionEnabled: false
+      previewService: {{ include "joanie.fullname" . }}-preview
+{{ else if eq .Values.strategy "canary" }}
+    canary: #Indicates that the rollout should use the Canary strategy
+      maxSurge: "25%"
+      maxUnavailable: 0
+      steps:
+      - setWeight: 50
+      - pause:
+          duration: 3m
+      - setWeight: 75
+      - pause: {} # pause indefinitely
+{{ end }}
+{{ end }}

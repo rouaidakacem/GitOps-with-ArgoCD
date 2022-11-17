@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: joanie-production-blue-green
+  name: joanie-production-canary
   namespace: argocd
   annotations: 
     # argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/ergocd-github
@@ -16,10 +16,10 @@ spec:
     path: joanie-argocd
     helm: 
       valueFiles:
-        - ../values/production-blue-green.yaml
+        - ../values/production-canary.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: joanie-production-blue-green
+    namespace: joanie-production-canary
   syncPolicy:
     syncOptions:
     - CreateNamespace=true

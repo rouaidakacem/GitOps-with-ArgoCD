@@ -14,8 +14,6 @@ spec:
   template:
     metadata:
       name: joanie-{{ environment }}
-      annotations:
-        argocd-image-updater.argoproj.io/image-list: rouaidaka/joanie:{{ imageTag }}
     spec:
       project: default
       source:
