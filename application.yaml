@@ -7,7 +7,7 @@ metadata:
     argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/ergocd-github
     argocd-image-updater.argoproj.io/image-list: joanie=rouaidaka/joanie:main
     argocd-image-updater.argoproj.io/joanie.update-strategy: digest
-    argocd-image-updater.argoproj.io/git-branch: main
+    argocd-image-updater.argoproj.io/git-branch: main:production-image-updater-{{.SHA256}}
 spec:
   project: default
   source:
