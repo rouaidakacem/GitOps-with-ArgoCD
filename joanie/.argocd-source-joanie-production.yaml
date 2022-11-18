@@ -4,7 +4,7 @@ helm:
     value: rouaidaka/joanie
     forcestring: false
   - name: image.tag
-    value: main@sha256:3b8261e5bdee2f6953daa48916e48bfeb7c1e1f32d87e2c5e1639b1432c81dfd
+    value: main@sha256:2ce692c84b041aa524d294343a2e2be678b64478b2bcf703619ba2b935597723
     forcestring: true
   - name: image.name
     value: rouaidaka/joanie
