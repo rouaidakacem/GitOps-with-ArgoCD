@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: joanie-production-blue-green
+  namespace: argocd
+  annotations: 
+    # argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/ergocd-github
+    # argocd-image-updater.argoproj.io/image-list: joanie=rouaidaka/joanie:main
+    # argocd-image-updater.argoproj.io/joanie.update-strategy: digest
+    # argocd-image-updater.argoproj.io/git-branch: main:production-image-updater-{{.SHA256}}
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/rouaidakacem/GitOps-with-ArgoCD.git
+    targetRevision: main
+    path: jitsi-magnify
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: jitsi-magnify
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      prune: true

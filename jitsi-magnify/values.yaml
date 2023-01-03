@@ -1,0 +1,28 @@
+django:
+  fullnameOverride: magnify
+  image:
+    repository: rouaidaka/magnify
+    pullPolicy: IfNotPresent
+    tag: test3
+  domainName: "example"
+  extraEnvVarsSecret: 'jitsi-magnify'
+  service:
+    type: NodePort
+    port: 8000
+  appDjangoSettingsModule: "settings"
+  appDjangoConfiguration: "Development"
+  # djangoAppSecrets:
+  #   - key: DJANGO_SECRET_KEY
+  #     value: ThisIsAnExampleKeyForTest
+  #   - key: DJANGO_JWT_PRIVATE_SIGNING_KEY
+  #     value: "12345"
+  #   - key: JWT_JITSI_SECRET_KEY
+  #     value: ThisIsAnExampleKeyFor
+  databaseName: magnify
+  postgresql:
+    enabled: true
+    auth:
+      username: fun
+      database: magnify
+      password: pass
+
