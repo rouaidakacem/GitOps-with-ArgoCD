@@ -5,19 +5,19 @@ django:
     pullPolicy: IfNotPresent
     tag: test3
   domainName: "example"
-  extraEnvVarsSecret: 'jitsi-magnify'
+  extraEnvVarsSecret: "mysecret"
   service:
     type: NodePort
     port: 8000
   appDjangoSettingsModule: "settings"
   appDjangoConfiguration: "Development"
-  # djangoAppSecrets:
-  #   - key: DJANGO_SECRET_KEY
-  #     value: ThisIsAnExampleKeyForTest
-  #   - key: DJANGO_JWT_PRIVATE_SIGNING_KEY
-  #     value: "12345"
-  #   - key: JWT_JITSI_SECRET_KEY
-  #     value: ThisIsAnExampleKeyFor
+  djangoAppSecrets:
+    - key: DJANGO_SECRET_KEY
+      value: ThisIsAnExam
+    - key: DJANGO_JWT_PRIVATE_SIGNING_KEY
+      value: "123456789012"
+    - key: JWT_JITSI_SECRET_KEY
+      value: ThisIsakeyanexa
   databaseName: magnify
   postgresql:
     enabled: true
